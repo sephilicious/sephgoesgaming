@@ -9,7 +9,7 @@ function render(){
   filtered.slice(0, visibleCount).forEach(v => {
     const card = document.createElement('a');
     card.className = 'video-card reveal';
-    card.href = 'https://www.youtube.com/@SephGoesGaming';
+    card.href = v.url && v.url.trim() !== '' ? v.url : 'https://www.youtube.com/@SephGoesGaming';
     card.target = '_blank';
     card.innerHTML = `
       <div class="thumb">
