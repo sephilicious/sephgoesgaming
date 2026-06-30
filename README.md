@@ -53,6 +53,10 @@ Edit `js/videos.js`. Each entry looks like:
 }
 ```
 
+## A note on caching
+
+`index.html` loads `style.css` and `script.js` with a `?v=2` query string. Browsers (and GitHub Pages' CDN) aggressively cache `.css`/`.js` files, so if you edit those files later and the live site doesn't show your changes, bump the version number (`?v=3`, etc.) in `index.html` to force a fresh download. A hard refresh (Ctrl/Cmd+Shift+R) on your own machine works too, but visitors with a cached copy won't see updates until the version string changes.
+
 ## Deploying to GitHub Pages
 
 1. Push this repo to GitHub.
