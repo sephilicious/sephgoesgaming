@@ -229,9 +229,9 @@ section{position:relative; z-index:1; padding:110px 6vw;}
 }
 .about-mark{
   aspect-ratio:1; border:1px solid var(--rule); display:flex; align-items:center; justify-content:center;
-  position:relative;
+  position:relative; max-width:260px; justify-self:start;
 }
-.about-mark svg{width:55%; height:55%;}
+.about-mark svg{width:40%; height:40%;}
 .about-mark::before{
   content:""; position:absolute; inset:18px; border:1px solid var(--gold-dim); opacity:0.35;
 }
