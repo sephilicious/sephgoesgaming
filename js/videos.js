@@ -3,7 +3,7 @@
 // url: the direct YouTube watch link for that video, e.g. "https://www.youtube.com/watch?v=XXXXXXXXXXX"
 //      Leave as "" to fall back to the channel page.
 const videos = [
-  {title:"Ice Lance Youga1 Deletes SS20 | 15T DPS", url:"", views:"3.5K", time:"1 month ago", dur:"15:55", dps:"15T DPS", game:"tli", badge:"Torchlight Infinite"},
+  {title:"Ice Lance Youga1 Deletes SS20 | 15T DPS", url:"https://youtu.be/2qDKS2ry-Xo", views:"3.5K", time:"1 month ago", dur:"15:55", dps:"15T DPS", game:"tli", badge:"Torchlight Infinite"},
   {title:"5T+ DPS and Freezing Everything – Ice Lance Youga1 SS12", url:"", views:"2.8K", time:"1 month ago", dur:"9:19", dps:"5T+ DPS", game:"tli", badge:"Torchlight Infinite"},
   {title:"1T DPS Chromatic Shot Youga1 | Full Build Guide SS12 Lunaria", url:"", views:"637", time:"2 months ago", dur:"9:23", dps:"1T DPS", game:"tli", badge:"Torchlight Infinite"},
   {title:"Build Diary #2 – 60B DPS Achieved! Chromatic Shot Youga1 SS12 Lunaria", url:"", views:"446", time:"2 months ago", dur:"11:44", dps:"60B DPS", game:"tli", badge:"Torchlight Infinite"},
