@@ -225,17 +225,16 @@ section{position:relative; z-index:1; padding:110px 6vw;}
 
 /* ============ ABOUT / CTA ============ */
 .about{
-  display:grid; grid-template-columns: 1fr 1.3fr; gap:70px; align-items:center;
+  max-width:760px;
 }
 .about-mark{
-  aspect-ratio:1; border:1px solid var(--rule); display:flex; align-items:center; justify-content:center;
-  position:relative; max-width:260px; justify-self:start;
+  width:30px; height:30px; display:block; margin-bottom:28px;
 }
-.about-mark svg{width:40%; height:40%;}
-.about-mark::before{
-  content:""; position:absolute; inset:18px; border:1px solid var(--gold-dim); opacity:0.35;
+.about-copy p{
+  color:var(--bone); line-height:1.85; font-size:1.15rem; font-weight:300;
+  margin-bottom:24px; max-width:720px;
 }
-.about-copy p{color:var(--ash); line-height:1.9; font-size:1rem; margin-bottom:20px; max-width:560px;}
+.about-copy p:last-child{margin-bottom:0;}
 .about-copy strong{color:var(--gold-bright); font-weight:600;}
 
 .follow-strip{
@@ -272,7 +271,6 @@ footer .fine{color:var(--ash); font-size:0.78rem; letter-spacing:1px;}
 }
 @media (max-width:860px){
   .nav-links{display:none;}
-  .about{grid-template-columns:1fr;}
-  .about-mark{max-width:200px; margin:0 auto;}
+  .about-copy p{font-size:1.02rem;}
   .hero-games{gap:10px;}
 }
