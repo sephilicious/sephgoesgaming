@@ -37,13 +37,14 @@ body::before{
 /* ============ NAV ============ */
 nav{
   position:sticky; top:0; z-index:50;
-  display:flex; align-items:center; justify-content:space-between;
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
   padding:18px 6vw;
   background:rgba(11,10,8,0.88);
   backdrop-filter:blur(6px);
   border-bottom:1px solid var(--rule);
 }
-.brand{display:flex; align-items:center; gap:10px;}
+.brand{display:flex; align-items:center; gap:10px; justify-self:start;}
+.nav-cta{justify-self:end;}
 .brand-mark{width:26px; height:26px; flex-shrink:0;}
 .brand-name{font-family:'Cinzel',serif; font-weight:800; letter-spacing:2px; font-size:1.1rem;}
 .brand-name span{color:var(--gold);}

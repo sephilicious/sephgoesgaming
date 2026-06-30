@@ -1,6 +1,6 @@
 const grid = document.getElementById('videoGrid');
 const showMoreBtn = document.getElementById('showMoreBtn');
-let visibleCount = 6;
+let visibleCount = 8;
 let currentFilter = 'all';
 
 function render(){
@@ -33,13 +33,13 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentFilter = btn.dataset.filter;
-    visibleCount = 6;
+    visibleCount = 8;
     render();
   });
 });
 
 showMoreBtn.addEventListener('click', () => {
-  visibleCount += 6;
+  visibleCount += 8;
   render();
 });
 
