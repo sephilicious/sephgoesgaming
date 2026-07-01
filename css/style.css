@@ -205,11 +205,6 @@ section{position:relative; z-index:1; padding:110px 6vw;}
   opacity:0; transition:opacity .25s; z-index:2;
 }
 .video-card:hover .play-icon{opacity:1;}
-.thumb .dps{
-  font-family:'Cinzel',serif; font-weight:800; color:var(--gold-bright);
-  font-size:1.4rem; padding:16px; text-shadow:0 2px 10px rgba(0,0,0,0.8);
-  letter-spacing:1px;
-}
 .thumb .duration{
   position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.8);
   color:var(--bone); font-size:0.72rem; padding:2px 7px; letter-spacing:1px;
