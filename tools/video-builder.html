@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Video Entry Builder — SephGoesGaming</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Oswald:wght@400;500;600&display=swap');
+  :root{
+    --black:#0b0a08; --black-soft:#141210; --gold:#f3c317; --gold-bright:#ffe066;
+    --gold-dim:#8a6c0e; --ash:#9c9588; --bone:#e9e3d3; --rule:#2c2722;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--black); color:var(--bone); font-family:'Oswald',sans-serif;
+    margin:0; padding:50px 6vw 90px;
+  }
+  h1{font-family:'Cinzel',serif; font-size:1.8rem; color:var(--gold); text-transform:uppercase; letter-spacing:1px;}
+  p.lede{color:var(--ash); max-width:620px; line-height:1.7; margin-top:10px;}
+  .card{
+    background:var(--black-soft); border:1px solid var(--rule); padding:28px;
+    max-width:640px; margin-top:36px;
+  }
+  label{display:block; font-size:0.78rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:6px; margin-top:18px;}
+  label:first-of-type{margin-top:0;}
+  input, select{
+    width:100%; background:var(--black); border:1px solid var(--rule); color:var(--bone);
+    padding:10px 12px; font-family:'Oswald',sans-serif; font-size:0.95rem;
+  }
+  input:focus, select:focus{outline:none; border-color:var(--gold-dim);}
+  .hint{color:var(--ash); font-size:0.75rem; margin-top:6px;}
+  .row{display:flex; gap:14px;}
+  .row > div{flex:1;}
+  button{
+    margin-top:22px; background:var(--gold); color:var(--black); border:none;
+    padding:12px 26px; font-family:'Oswald',sans-serif; font-weight:600; letter-spacing:1.5px;
+    text-transform:uppercase; font-size:0.8rem; cursor:pointer;
+  }
+  button:hover{background:var(--gold-bright);}
+  button.secondary{
+    background:transparent; border:1px solid var(--gold-dim); color:var(--gold);
+  }
+  .status{margin-top:14px; font-size:0.85rem; min-height:20px;}
+  .status.ok{color:#8fdc8f;}
+  .status.err{color:#e08a8a;}
+  textarea{
+    width:100%; min-height:260px; margin-top:30px; background:var(--black);
+    border:1px solid var(--rule); color:var(--gold-bright); padding:16px;
+    font-family:monospace; font-size:0.85rem; line-height:1.6; resize:vertical;
+  }
+  .actions{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+</style>
+</head>
+<body>
+
+<h1>Video Entry Builder</h1>
+<p class="lede">Paste a YouTube link, fill in a few details, and this generates a ready-to-paste object for <code>js/videos.js</code>. Nothing here touches your live site — it just writes text into the box below for you to copy over.</p>
+
+<div class="card">
+  <label for="ytUrl">YouTube video URL</label>
+  <input id="ytUrl" type="text" placeholder="https://www.youtube.com/watch?v=XXXXXXXXXXX">
+  <div class="hint">Title auto-fills when you click away from this field — no API key required.</div>
+
+  <label for="title">Title</label>
+  <input id="title" type="text" placeholder="Auto-fills from the link above (editable)">
+
+  <div class="row">
+    <div>
+      <label for="dur">Duration</label>
+      <input id="dur" type="text" placeholder="e.g. 12:34">
+    </div>
+    <div>
+      <label for="game">Game</label>
+      <select id="game">
+        <option value="tli">Torchlight Infinite</option>
+        <option value="poe">Path of Exile</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="views">Views</label>
+      <input id="views" type="text" placeholder="e.g. 3.5K (optional)">
+    </div>
+    <div>
+      <label for="time">Upload time</label>
+      <input id="time" type="text" placeholder="e.g. 1 month ago (optional)">
+    </div>
+  </div>
+
+  <div class="actions">
+    <button id="addBtn">Add to List</button>
+    <button id="clearBtn" class="secondary" type="button">Clear List</button>
+  </div>
+  <div id="status" class="status"></div>
+</div>
+
+<div class="card">
+  <label for="output">Output — paste this into <code>js/videos.js</code></label>
+  <textarea id="output" readonly placeholder="Entries you add will appear here..."></textarea>
+  <div class="actions">
+    <button id="copyBtn" type="button">Copy to Clipboard</button>
+  </div>
+  <div id="copyStatus" class="status"></div>
+</div>
+
+<script>
+const ytUrl  = document.getElementById('ytUrl');
+const titleField = document.getElementById('title');
+const status = document.getElementById('status');
+const output = document.getElementById('output');
+const copyStatus = document.getElementById('copyStatus');
+
+const entries = [];
+
+function extractVideoId(url){
+  const patterns = [
+    /[?&]v=([\w-]{11})/,
+    /youtu\.be\/([\w-]{11})/,
+    /shorts\/([\w-]{11})/
+  ];
+  for (const p of patterns){
+    const m = url.match(p);
+    if (m) return m[1];
+  }
+  return null;
+}
+
+ytUrl.addEventListener('blur', async () => {
+  const url = ytUrl.value.trim();
+  if (!url) return;
+  status.textContent = 'Fetching title…';
+  status.className = 'status';
+  try {
+    const res = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
+    titleField.value = data.title || '';
+    status.textContent = 'Title loaded — edit if needed.';
+    status.className = 'status ok';
+  } catch (e){
+    status.textContent = "Couldn't auto-fetch the title — type it in manually.";
+    status.className = 'status err';
+  }
+});
+
+function esc(str){
+  return (str || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+}
+
+function render(){
+  output.value = entries.map(e =>
+    `  {title:"${esc(e.title)}", url:"${esc(e.url)}", views:${e.views ? `"${esc(e.views)}"` : 'null'}, time:${e.time ? `"${esc(e.time)}"` : 'null'}, dur:"${esc(e.dur)}", game:"${e.game}", badge:"${e.game === 'poe' ? 'Path of Exile' : 'Torchlight Infinite'}"},`
+  ).join('\n');
+}
+
+document.getElementById('addBtn').addEventListener('click', () => {
+  const url   = ytUrl.value.trim();
+  const title = titleField.value.trim();
+  const dur   = document.getElementById('dur').value.trim();
+  const views = document.getElementById('views').value.trim();
+  const time  = document.getElementById('time').value.trim();
+  const game  = document.getElementById('game').value;
+
+  if (!url || !title || !dur){
+    status.textContent = 'Fill in at least: URL, title, and duration.';
+    status.className = 'status err';
+    return;
+  }
+  if (!extractVideoId(url)){
+    status.textContent = "That doesn't look like a valid YouTube link — double check it.";
+    status.className = 'status err';
+    return;
+  }
+
+  entries.unshift({ url, title, dur, views, time, game });
+  render();
+  status.textContent = `Added. ${entries.length} entr${entries.length === 1 ? 'y' : 'ies'} ready to copy.`;
+  status.className = 'status ok';
+
+  ytUrl.value = '';
+  titleField.value = '';
+  document.getElementById('dur').value = '';
+  document.getElementById('views').value = '';
+  document.getElementById('time').value = '';
+});
+
+document.getElementById('clearBtn').addEventListener('click', () => {
+  entries.length = 0;
+  render();
+  status.textContent = 'List cleared.';
+  status.className = 'status';
+});
+
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  if (!output.value){
+    copyStatus.textContent = 'Nothing to copy yet.';
+    copyStatus.className = 'status err';
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(output.value);
+    copyStatus.textContent = 'Copied! Paste it inside the videos array in js/videos.js.';
+    copyStatus.className = 'status ok';
+  } catch (e){
+    output.select();
+    copyStatus.textContent = 'Press Ctrl/Cmd+C to copy the selected text.';
+    copyStatus.className = 'status';
+  }
+});
+</script>
+
+</body>
+</html>
