@@ -9,9 +9,9 @@ const videos = [
   {title:"Build Diary #2 – 60B DPS Achieved! Chromatic Shot Youga1 SS12 Lunaria", url:"https://youtu.be/Mu38K7-iaUo", views:"446", time:"2 months ago", dur:"11:44", game:"tli", badge:"Torchlight Infinite"},
   {title:"Build Diary #1 – Chromatic Shot Youga1 (Early Progress) SS12 Lunaria | TLI", url:"https://youtu.be/NHy8yIF72fg", views:"423", time:"2 months ago", dur:"9:23", game:"tli", badge:"Torchlight Infinite"},
   {title:"Yet another Minion Pact Blade Vortex Occultist (Poison Edition) | PoE Mirage 3.28", url:"https://youtu.be/ptg0WE5ClD4", views:"7.7K", time:"3 months ago", dur:"13:16", game:"poe", badge:"Path of Exile"},
-  {title:"Creeping Frost of Floes Final Update | Cold DoT Build | PoE Mirage League 3.28", url:"https://youtu.be/lLNDJde_sNg", views:null, time:null, dur:"10:18", game:"poe", badge:"Path of Exile"},
-  {title:"Creeping Frost of Floes Update #1 | Cold DoT Progress | PoE Mirage League 3.28", url:"https://youtu.be/u0FRXIwGB1k", views:null, time:null, dur:"6:06", game:"poe", badge:"Path of Exile"},
-  {title:"Creeping Frost of Floes – League Start Plan (3.28) | PoE Mirage League | Cold DoT Power", url:"https://youtu.be/SiWAJzRrxHg", views:null, time:null, dur:"7:00", game:"poe", badge:"Path of Exile"},
+  {title:"Creeping Frost of Floes Final Update | Cold DoT Build | PoE Mirage League 3.28", url:"https://youtu.be/lLNDJde_sNg", views:"2.5k", time:"3 months ago", dur:"10:18", game:"poe", badge:"Path of Exile"},
+  {title:"Creeping Frost of Floes Update #1 | Cold DoT Progress | PoE Mirage League 3.28", url:"https://youtu.be/u0FRXIwGB1k", views:"2k", time:"3 months ago", dur:"6:06", game:"poe", badge:"Path of Exile"},
+  {title:"Creeping Frost of Floes – League Start Plan (3.28) | PoE Mirage League | Cold DoT Power", url:"https://youtu.be/SiWAJzRrxHg", views:"4.6k", time:"3 months ago", dur:"7:00", game:"poe", badge:"Path of Exile"},
   {title:"Youga 1 Ice Lance 10T+ DPS | SS20 Down | S11 Vorax | Torchlight Infinite", url:"https://youtu.be/9aI3-ZapcFI", views:"2.8K", time:"4 months ago", dur:"11:59", game:"tli", badge:"Torchlight Infinite"},
   {title:"Youga1 Ice Lance 5T+ Build Guide Update | SS11 Vorax | Torchlight Infinite", url:"https://youtu.be/t6C9eSbDRSw", views:"1.3K", time:"4 months ago", dur:"15:02", game:"tli", badge:"Torchlight Infinite"},
   {title:"Youga1 Ice Lance 1T Build Guide to Profound | S11 Vorax", url:"https://youtu.be/sgYb0V3X3tY", views:"1.7K", time:"5 months ago", dur:"16:46", game:"tli", badge:"Torchlight Infinite"},
@@ -24,4 +24,7 @@ const videos = [
   {title:"Iris 2 Build Diary #5 – 2 Trillion DPS Final Update | TLI SS10 Overrealm", url:"https://youtu.be/8Wjtm22tjmo", views:"3.6K", time:"8 months ago", dur:"9:01", game:"tli", badge:"Torchlight Infinite"},
   {title:"Iris 2 Build Diary #4 – 600B DPS Blasting Profound | TLI SS10 Overrealm", url:"https://youtu.be/7AyafV9Z6iY", views:"2.7K", time:"8 months ago", dur:"15:19", game:"tli", badge:"Torchlight Infinite"},
   {title:"Iris 2 Build Diary #3 – 70B DPS Update TLI | SS10 Overrealm", url:"https://youtu.be/rVzzJ84k_uI", views:"1.6K", time:"8 months ago", dur:"10:44", game:"tli", badge:"Torchlight Infinite"}
+  {title:"Iris 2 Build Diary #2 | T8 Traveler down| TLI (Overrealm)", url:"https://youtu.be/xe9E7EGK_14?si=955l6h1TmYfM1SvG", views:"2.6k", time:"8 months ago", dur:"24:31", game:"tli", badge:"Torchlight Infinite"},
+  {title:"Iris 2 Build Diary #1 | T7 Traveler Defeated | Torchlight Infinite (Overrealm)", url:"https://youtu.be/8nppVpk10s4?si=j8o8RIUK4TI80_VO", views:"3.5k", time:"8 months ago", dur:"7:06", game:"tli", badge:"Torchlight Infinite"},
+  {title:"Yet Another Forbidden Rite Occultist variant from the atlasverse?!?! | 90 all max res!! (Poe 3.26)", url:"https://youtu.be/RcOABgRm_T0?si=AzCWgShbTy0neNmA", views:"9.1k", time:"11 months ago", dur:"8:32", game:"poe", badge:"Path of Exile"}
 ];
