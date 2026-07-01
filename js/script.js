@@ -59,6 +59,7 @@ function render(){
         ${id ? `<div class="play-icon">▶</div>` : ''}
         <span class="game-badge">${v.badge}</span>
         <span class="duration">${v.dur}</span>
+        ${!id ? `<span class="dps">${v.dps}</span>` : ''}
       </div>
       <div class="video-meta">
         <h4>${v.title}</h4>

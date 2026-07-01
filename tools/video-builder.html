@@ -70,6 +70,17 @@
       <input id="dur" type="text" placeholder="e.g. 12:34">
     </div>
     <div>
+      <label for="views">Views</label>
+      <input id="views" type="text" placeholder="e.g. 3.5K (optional)">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="time">Upload time</label>
+      <input id="time" type="text" placeholder="e.g. 1 month ago (optional)">
+    </div>
+    <div>
       <label for="game">Game</label>
       <select id="game">
         <option value="tli">Torchlight Infinite</option>
@@ -78,16 +89,9 @@
     </div>
   </div>
 
-  <div class="row">
-    <div>
-      <label for="views">Views</label>
-      <input id="views" type="text" placeholder="e.g. 3.5K (optional)">
-    </div>
-    <div>
-      <label for="time">Upload time</label>
-      <input id="time" type="text" placeholder="e.g. 1 month ago (optional)">
-    </div>
-  </div>
+  <label for="dps">Thumbnail stat</label>
+  <input id="dps" type="text" placeholder="e.g. 15T DPS, Build Diary #2, League Start">
+  <div class="hint">Shown as the big text on the card's thumbnail.</div>
 
   <div class="actions">
     <button id="addBtn">Add to List</button>
@@ -106,7 +110,7 @@
 </div>
 
 <script>
-const ytUrl  = document.getElementById('ytUrl');
+const ytUrl = document.getElementById('ytUrl');
 const titleField = document.getElementById('title');
 const status = document.getElementById('status');
 const output = document.getElementById('output');
@@ -116,9 +120,9 @@ const entries = [];
 
 function extractVideoId(url){
   const patterns = [
-    /[?&]v=([\w-]{11})/,
-    /youtu\.be\/([\w-]{11})/,
-    /shorts\/([\w-]{11})/
+    /(?:youtube\.com\/watch\?v=)([\w-]{11})/,
+    /(?:youtu\.be\/)([\w-]{11})/,
+    /(?:youtube\.com\/shorts\/)([\w-]{11})/
   ];
   for (const p of patterns){
     const m = url.match(p);
@@ -151,20 +155,21 @@ function esc(str){
 
 function render(){
   output.value = entries.map(e =>
-    `  {title:"${esc(e.title)}", url:"${esc(e.url)}", views:${e.views ? `"${esc(e.views)}"` : 'null'}, time:${e.time ? `"${esc(e.time)}"` : 'null'}, dur:"${esc(e.dur)}", game:"${e.game}", badge:"${e.game === 'poe' ? 'Path of Exile' : 'Torchlight Infinite'}"},`
+    `  {title:"${esc(e.title)}", url:"${esc(e.url)}", views:${e.views ? `"${esc(e.views)}"` : 'null'}, time:${e.time ? `"${esc(e.time)}"` : 'null'}, dur:"${esc(e.dur)}", dps:"${esc(e.dps)}", game:"${e.game}", badge:"${e.game === 'poe' ? 'Path of Exile' : 'Torchlight Infinite'}"},`
   ).join('\n');
 }
 
 document.getElementById('addBtn').addEventListener('click', () => {
-  const url   = ytUrl.value.trim();
+  const url = ytUrl.value.trim();
   const title = titleField.value.trim();
-  const dur   = document.getElementById('dur').value.trim();
+  const dur = document.getElementById('dur').value.trim();
+  const dps = document.getElementById('dps').value.trim();
   const views = document.getElementById('views').value.trim();
-  const time  = document.getElementById('time').value.trim();
-  const game  = document.getElementById('game').value;
+  const time = document.getElementById('time').value.trim();
+  const game = document.getElementById('game').value;
 
-  if (!url || !title || !dur){
-    status.textContent = 'Fill in at least: URL, title, and duration.';
+  if (!url || !title || !dur || !dps){
+    status.textContent = 'Fill in at least: URL, title, duration, and thumbnail stat.';
     status.className = 'status err';
     return;
   }
@@ -174,7 +179,7 @@ document.getElementById('addBtn').addEventListener('click', () => {
     return;
   }
 
-  entries.unshift({ url, title, dur, views, time, game });
+  entries.unshift({ url, title, dur, dps, views, time, game });
   render();
   status.textContent = `Added. ${entries.length} entr${entries.length === 1 ? 'y' : 'ies'} ready to copy.`;
   status.className = 'status ok';
@@ -182,6 +187,7 @@ document.getElementById('addBtn').addEventListener('click', () => {
   ytUrl.value = '';
   titleField.value = '';
   document.getElementById('dur').value = '';
+  document.getElementById('dps').value = '';
   document.getElementById('views').value = '';
   document.getElementById('time').value = '';
 });
