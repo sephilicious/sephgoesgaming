@@ -1,27 +1,76 @@
 const grid = document.getElementById('videoGrid');
 const showMoreBtn = document.getElementById('showMoreBtn');
+const modal = document.getElementById('videoModal');
+const modalIframe = document.getElementById('modalIframe');
+const modalTitle = document.getElementById('modalTitle');
+const modalViews = document.getElementById('modalViews');
+const modalTime = document.getElementById('modalTime');
+const modalClose = document.getElementById('modalClose');
+
 let visibleCount = 8;
 let currentFilter = 'all';
+
+function extractVideoId(url){
+  if (!url) return null;
+  const patterns = [
+    /[?&]v=([\w-]{11})/,
+    /youtu\.be\/([\w-]{11})/,
+    /shorts\/([\w-]{11})/
+  ];
+  for (const p of patterns){
+    const m = url.match(p);
+    if (m) return m[1];
+  }
+  return null;
+}
+
+function openModal(v){
+  const id = extractVideoId(v.url);
+  if (!id) return;
+  modalIframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+  modalTitle.textContent = v.title;
+  modalViews.textContent = v.views ? v.views + ' views' : '';
+  modalTime.textContent = v.time || '';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(){
+  modal.classList.remove('open');
+  modalIframe.src = '';
+  document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 function render(){
   const filtered = videos.filter(v => currentFilter === 'all' || v.game === currentFilter);
   grid.innerHTML = '';
   filtered.slice(0, visibleCount).forEach(v => {
-    const card = document.createElement('a');
+    const id = extractVideoId(v.url);
+    const card = document.createElement('div');
     card.className = 'video-card reveal';
-    card.href = v.url && v.url.trim() !== '' ? v.url : 'https://www.youtube.com/@SephGoesGaming';
-    card.target = '_blank';
+    card.style.cursor = id ? 'pointer' : 'default';
     card.innerHTML = `
       <div class="thumb">
+        ${id ? `<img class="thumb-img" src="https://img.youtube.com/vi/${id}/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${id}/hqdefault.jpg'" alt="${v.title}">` : ''}
+        ${id ? `<div class="play-icon">▶</div>` : ''}
         <span class="game-badge">${v.badge}</span>
         <span class="duration">${v.dur}</span>
-        <span class="dps">${v.dps}</span>
+        ${!id ? `<span class="dps">${v.dps}</span>` : ''}
       </div>
       <div class="video-meta">
         <h4>${v.title}</h4>
         <div class="sub"><span>${v.views ? v.views + ' views' : ''}</span><span>${v.time || ''}</span></div>
       </div>
     `;
+    if (id){
+      card.addEventListener('click', () => openModal(v));
+    } else {
+      card.addEventListener('click', () => window.open('https://www.youtube.com/@SephGoesGaming', '_blank'));
+    }
     grid.appendChild(card);
   });
   showMoreBtn.style.display = visibleCount >= filtered.length ? 'none' : 'block';

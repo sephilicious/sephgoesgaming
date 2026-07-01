@@ -6,7 +6,7 @@
 <meta name="description" content="Path of Exile and Torchlight Infinite build diaries, league-start plans, and trillion-DPS guides from SephGoesGaming.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 
@@ -95,8 +95,24 @@
   <div class="fine">© 2026 SephGoesGaming · Path of Exile & Torchlight Infinite Build Guides</div>
 </footer>
 
-<script src="js/videos.js?v=3"></script>
-<script src="js/script.js?v=3"></script>
+<!-- Video Modal -->
+<div id="videoModal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-player">
+      <iframe id="modalIframe" src="" frameborder="0" allowfullscreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+      </iframe>
+    </div>
+    <div class="modal-info">
+      <h3 id="modalTitle"></h3>
+      <div class="modal-meta"><span id="modalViews"></span><span id="modalTime"></span></div>
+    </div>
+  </div>
+</div>
+
+<script src="js/videos.js?v=4"></script>
+<script src="js/script.js?v=4"></script>
 
 </body>
 </html>

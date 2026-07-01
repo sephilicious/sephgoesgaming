@@ -39,11 +39,14 @@ No build tools required. Either:
 
 ## Updating the video list
 
-Edit `js/videos.js`. Each entry looks like:
+The easiest way: open **`tools/video-builder.html`** in any browser. Paste a YouTube link, it auto-fetches the title for you, fill in duration / thumbnail stat / game, click **Add to List**, repeat for each video, then copy the generated text straight into `js/videos.js`. No coding needed.
+
+Doing it by hand: edit `js/videos.js`. Each entry looks like:
 
 ```js
 {
   title: "Video title",
+  url: "https://www.youtube.com/watch?v=XXXXXXXXXXX", // leave "" to link to the channel instead
   views: "3.5K",       // or null if unknown
   time: "1 month ago", // or null if unknown
   dur: "15:55",
