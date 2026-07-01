@@ -23,7 +23,7 @@ const videos = [
   {title:"Forbidden Rite Occultist Update & Wintertide Brand League Start | POE 3.27", url:"https://youtu.be/0QVO1tBsNZk", views:"2.4K", time:"8 months ago", dur:"16:59", game:"poe", badge:"Path of Exile"},
   {title:"Iris 2 Build Diary #5 – 2 Trillion DPS Final Update | TLI SS10 Overrealm", url:"https://youtu.be/8Wjtm22tjmo", views:"3.6K", time:"8 months ago", dur:"9:01", game:"tli", badge:"Torchlight Infinite"},
   {title:"Iris 2 Build Diary #4 – 600B DPS Blasting Profound | TLI SS10 Overrealm", url:"https://youtu.be/7AyafV9Z6iY", views:"2.7K", time:"8 months ago", dur:"15:19", game:"tli", badge:"Torchlight Infinite"},
-  {title:"Iris 2 Build Diary #3 – 70B DPS Update TLI | SS10 Overrealm", url:"https://youtu.be/rVzzJ84k_uI", views:"1.6K", time:"8 months ago", dur:"10:44", game:"tli", badge:"Torchlight Infinite"}
+  {title:"Iris 2 Build Diary #3 – 70B DPS Update TLI | SS10 Overrealm", url:"https://youtu.be/rVzzJ84k_uI", views:"1.6K", time:"8 months ago", dur:"10:44", game:"tli", badge:"Torchlight Infinite"},
   {title:"Iris 2 Build Diary #2 | T8 Traveler down| TLI (Overrealm)", url:"https://youtu.be/xe9E7EGK_14?si=955l6h1TmYfM1SvG", views:"2.6k", time:"8 months ago", dur:"24:31", game:"tli", badge:"Torchlight Infinite"},
   {title:"Iris 2 Build Diary #1 | T7 Traveler Defeated | Torchlight Infinite (Overrealm)", url:"https://youtu.be/8nppVpk10s4?si=j8o8RIUK4TI80_VO", views:"3.5k", time:"8 months ago", dur:"7:06", game:"tli", badge:"Torchlight Infinite"},
   {title:"Yet Another Forbidden Rite Occultist variant from the atlasverse?!?! | 90 all max res!! (Poe 3.26)", url:"https://youtu.be/RcOABgRm_T0?si=AzCWgShbTy0neNmA", views:"9.1k", time:"11 months ago", dur:"8:32", game:"poe", badge:"Path of Exile"}
