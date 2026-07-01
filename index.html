@@ -6,7 +6,7 @@
 <meta name="description" content="Path of Exile and Torchlight Infinite build diaries, league-start plans, and trillion-DPS guides from SephGoesGaming.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="css/style.css?v=7">
+<link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -26,7 +26,7 @@
 
 <section class="hero">
   <div class="hero-glow"></div>
-  <canvas id="heroCircuit"></canvas>
+  <div class="hero-rune">EXILE&nbsp;&nbsp;ASCEND&nbsp;&nbsp;OBLITERATE</div>
   <div class="eyebrow hero-in" style="animation-delay:.05s">ARPG Build Guides</div>
   <h1 class="hero-in" style="animation-delay:.18s"><span class="stroke">BUILDS THAT</span><br><span class="fill">BREAK THE GAME</span></h1>
   <p class="hero-sub hero-in" style="animation-delay:.32s">League starts, build diaries, and trillion-DPS endgame guides for Path of Exile and Torchlight Infinite — tested in-game, updated as the meta moves.</p>
@@ -111,109 +111,8 @@
   </div>
 </div>
 
-<script src="js/videos.js?v=7"></script>
-<script src="js/script.js?v=7"></script>
-<script>
-(function(){
-  const canvas = document.getElementById('heroCircuit');
-  const ctx = canvas.getContext('2d');
-  const GOLD = 'rgba(243,195,23,';
-  const NODE_R = 2.2;
+<script src="js/videos.js?v=6"></script>
+<script src="js/script.js?v=6"></script>
 
-  function resize(){
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-
-  function draw(){
-    const W = canvas.width, H = canvas.height;
-    ctx.clearRect(0, 0, W, H);
-
-    const COLS = 14, ROWS = 9;
-    const cellW = W / COLS, cellH = H / ROWS;
-
-    const nodes = [];
-    for (let r = 0; r <= ROWS; r++){
-      for (let c = 0; c <= COLS; c++){
-        nodes.push({
-          x: c * cellW + (Math.random() - 0.5) * cellW * 0.4,
-          y: r * cellH + (Math.random() - 0.5) * cellH * 0.4,
-          active: Math.random() > 0.35
-        });
-      }
-    }
-
-    const stride = COLS + 1;
-
-    for (let r = 0; r <= ROWS; r++){
-      for (let c = 0; c <= COLS; c++){
-        const a = nodes[r * stride + c];
-        if (!a.active) continue;
-
-        if (c < COLS && Math.random() > 0.4){
-          const b = nodes[r * stride + c + 1];
-          if (b.active){
-            const alpha = 0.08 + Math.random() * 0.18;
-            ctx.strokeStyle = GOLD + alpha + ')';
-            ctx.lineWidth = 0.7;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            if (Math.random() > 0.3){
-              const mid = a.x + (b.x - a.x) * (0.4 + Math.random() * 0.2);
-              ctx.lineTo(mid, a.y);
-              ctx.lineTo(mid, b.y);
-            }
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
-        }
-
-        if (r < ROWS && Math.random() > 0.45){
-          const b = nodes[(r + 1) * stride + c];
-          if (b.active){
-            const alpha = 0.08 + Math.random() * 0.15;
-            ctx.strokeStyle = GOLD + alpha + ')';
-            ctx.lineWidth = 0.7;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            if (Math.random() > 0.3){
-              const mid = a.y + (b.y - a.y) * (0.4 + Math.random() * 0.2);
-              ctx.lineTo(a.x, mid);
-              ctx.lineTo(b.x, mid);
-            }
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
-    for (const n of nodes){
-      if (!n.active) continue;
-      const alpha = 0.25 + Math.random() * 0.45;
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, NODE_R, 0, Math.PI * 2);
-      ctx.fillStyle = GOLD + alpha + ')';
-      ctx.fill();
-    }
-
-    const vignette = ctx.createRadialGradient(W/2, H/2, H*0.2, W/2, H/2, H*0.85);
-    vignette.addColorStop(0, 'rgba(11,10,8,0)');
-    vignette.addColorStop(1, 'rgba(11,10,8,0.82)');
-    ctx.fillStyle = vignette;
-    ctx.fillRect(0, 0, W, H);
-  }
-
-  let frame;
-  function loop(){
-    draw();
-    frame = setTimeout(loop, 2800 + Math.random() * 1400);
-  }
-
-  resize();
-  loop();
-  window.addEventListener('resize', () => { clearTimeout(frame); resize(); loop(); });
-})();
-</script>
 </body>
 </html>
